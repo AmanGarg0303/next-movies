@@ -1,20 +1,19 @@
 import Image from "next/image";
+import bgImg from "../public/images/bgImg.jpg";
 
 export const Hero = () => {
   return (
-    <div className="relative ">
+    <div className="relative w-screen h-[80vh]">
       <Image
-        src="/images/bgImg.jpg"
+        src={bgImg}
         unoptimized
         priority
         alt="hero"
-        width={200}
-        height={200}
+        fill
         style={{
           maskImage:
             "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.9), rgba(0,0,0,0.4), rgba(0,0,0,0))",
         }}
-        className="w-full h-[80vh]"
       />
 
       <div className="absolute bottom-10 left-16 w-[40vw] flex flex-col gap-y-2">

@@ -16,12 +16,12 @@ export const Genres = () => {
   return (
     <div className="flex gap-x-24 mx-16 px-16 py-4 no-scrollbar overflow-x-auto">
       {genres.map((genre, _) => (
-        <li
+        <div
           key={_}
-          className="list-none whitespace-nowrap border px-8 py-4 text-xl font-semibold rounded-xl cursor-pointer bg-[#0e0e0e] transition duration-100 transform hover:scale-125"
+          className="whitespace-nowrap border px-8 py-4 text-xl font-semibold rounded-xl cursor-pointer bg-[#0e0e0e] transition duration-100 transform hover:scale-125"
         >
           {genre}
-        </li>
+        </div>
       ))}
     </div>
   );

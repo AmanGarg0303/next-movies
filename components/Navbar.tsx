@@ -20,7 +20,7 @@ export const Navbar = () => {
         </Link>
 
         <div>
-          <ul className="flex gap-x-8">
+          <div className="flex gap-x-8">
             <Button variant="link" className="text-white text-xl">
               Home
             </Button>
@@ -30,7 +30,7 @@ export const Navbar = () => {
             <Button variant="link" className="text-white text-xl">
               Explore
             </Button>
-          </ul>
+          </div>
         </div>
 
         <DropdownMenu>
