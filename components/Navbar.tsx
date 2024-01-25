@@ -1,5 +1,15 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
+import { LogOutIcon, UserIcon } from "lucide-react";
 
 export const Navbar = () => {
   return (
@@ -23,9 +33,37 @@ export const Navbar = () => {
           </ul>
         </div>
 
-        <Button variant="ghost" className="text-xl">
-          Logout
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="text-xl">
+            <Image
+              src="/images/background.jpg"
+              width={50}
+              height={50}
+              alt="profile"
+              unoptimized
+              className="rounded-full w-12 h-12"
+            />
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="bg-[#0e0e0e] text-white border-none outline-none">
+            <DropdownMenuItem>
+              <div className="flex items-center justify-between w-full">
+                <span>
+                  <UserIcon className="mr-2 h-4 w-4" />
+                </span>
+                <span>amangarg0303</span>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <div className="flex items-center justify-between w-full">
+                <span>
+                  <LogOutIcon className="mr-2 h-4 w-4" />
+                </span>
+                <span>Log out</span>
+              </div>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </nav>
   );
