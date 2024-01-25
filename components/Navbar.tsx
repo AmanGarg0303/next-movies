@@ -47,7 +47,7 @@ export const Navbar = () => {
 
           <DropdownMenuContent className="bg-[#0e0e0e] text-white border-none outline-none">
             <DropdownMenuItem>
-              <div className="flex items-center justify-between w-full">
+              <div className="flex items-center justify-between w-full cursor-pointer">
                 <span>
                   <UserIcon className="mr-2 h-4 w-4" />
                 </span>
@@ -55,7 +55,7 @@ export const Navbar = () => {
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <div className="flex items-center justify-between w-full">
+              <div className="flex items-center justify-between w-full cursor-pointer">
                 <span>
                   <LogOutIcon className="mr-2 h-4 w-4" />
                 </span>
