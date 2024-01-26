@@ -44,3 +44,15 @@ model User {
 
   @@map("users")
 }
+
+model Movie {
+  id               String   @id @default(cuid())
+  title            String
+  shortDescription String
+  description      String
+  rating           String
+  coverImg         String?
+  genres           String[]
+  publishedDate    String?
+  createdAt        DateTime @default(now())
+}
