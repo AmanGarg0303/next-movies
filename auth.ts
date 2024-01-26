@@ -12,16 +12,24 @@ export const {
   pages: {
     signIn: "/auth/login",
   },
+  events: {
+    async linkAccount({ user }) {
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          emailVerified: new Date(),
+        },
+      });
+    },
+  },
   callbacks: {
     async session({ session }) {
-      // console.log({ session });
-
       return session;
     },
 
     async jwt({ token }) {
-      // console.log({ token });
-
       return token;
     },
   },
