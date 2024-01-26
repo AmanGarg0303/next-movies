@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import {
@@ -10,10 +9,10 @@ import {
 import Image from "next/image";
 import { UserIcon } from "lucide-react";
 import { LogoutBtn } from "./Logout";
-import { useSession } from "next-auth/react";
+import { auth } from "@/auth";
 
-export const Navbar = () => {
-  const session = useSession();
+export const Navbar = async () => {
+  const session = await auth();
   // console.log(session);
 
   return (
@@ -37,7 +36,7 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {session.status === "unauthenticated" ? (
+        {!session?.user ? (
           <Link href="/auth/login">
             <Button variant="secondary" className="text-xl font-medium">
               Login
@@ -47,7 +46,7 @@ export const Navbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="text-xl">
               <Image
-                src={session.data?.user?.image!}
+                src={session?.user?.image!}
                 width={50}
                 height={50}
                 alt="profile"
@@ -62,16 +61,10 @@ export const Navbar = () => {
                   <span>
                     <UserIcon className="mr-2 h-4 w-4" />
                   </span>
-                  <span>{session?.data?.user?.name}</span>
+                  <span>{session?.user?.name}</span>
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                {/* <div className="flex items-center justify-between w-full cursor-pointer">
-                  <span>
-                    <LogOutIcon className="mr-2 h-4 w-4" />
-                  </span>
-                  <span onClick={logoutAction}>Log out</span>
-                </div> */}
                 <LogoutBtn />
               </DropdownMenuItem>
             </DropdownMenuContent>
