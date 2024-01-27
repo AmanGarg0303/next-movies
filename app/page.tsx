@@ -5,7 +5,7 @@ import { Movies } from "@/components/Movies";
 
 export default function Home() {
   return (
-    <main>
+    <main className="scrollbar-hide">
       <div className="h-screen">
         <Navbar />
         <Hero />

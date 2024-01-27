@@ -20,9 +20,9 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
-      <html lang="en">
+      <html lang="en" className="no-scrollbar">
         <body
-          className={`${inter.className} bg-black text-white no-scrollbar overflow-y-scroll overflow-x-hidden`}
+          className={`${inter.className} bg-black text-white overflow-x-hidden h-full`}
         >
           {children}
         </body>
