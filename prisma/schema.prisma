@@ -50,7 +50,7 @@ model Movie {
   title            String
   shortDescription String
   description      String
-  rating           String
+  rating           Float    @default(0.1)
   coverImg         String?
   genres           String[]
   publishedDate    String?

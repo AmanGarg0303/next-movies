@@ -22,7 +22,7 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body
-          className={`${inter.className} bg-black text-white no-scrollbar overflow-y-scroll`}
+          className={`${inter.className} bg-black text-white no-scrollbar overflow-y-scroll overflow-x-hidden`}
         >
           {children}
         </body>

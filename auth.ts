@@ -26,14 +26,6 @@ export const {
     },
   },
   callbacks: {
-    // async session({ session }) {
-    //   return session;
-    // },
-
-    // async jwt({ token }) {
-    //   console.log(token);
-    //   return token;
-    // },
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub as string;
@@ -59,8 +51,6 @@ export const {
       });
       if (!existingUser) return token;
 
-      // token.name = existingUser.name;
-      // token.email = existingUser.email;
       token.role = existingUser.role;
 
       return token;

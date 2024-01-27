@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { UserIcon } from "lucide-react";
+import { UserIcon, ClapperboardIcon } from "lucide-react";
 import { LogoutBtn } from "./Logout";
 import { auth } from "@/auth";
 
@@ -64,6 +64,20 @@ export const Navbar = async () => {
                   <span>{session?.user?.name}</span>
                 </div>
               </DropdownMenuItem>
+
+              {session?.user?.role === "ADMIN" && (
+                <Link href={"/admin/addMovie"}>
+                  <DropdownMenuItem>
+                    <div className="flex items-center justify-between w-full cursor-pointer">
+                      <span>
+                        <ClapperboardIcon className="mr-2 h-4 w-4" />
+                      </span>
+                      <span>Add Movie</span>
+                    </div>
+                  </DropdownMenuItem>
+                </Link>
+              )}
+
               <DropdownMenuItem>
                 <LogoutBtn />
               </DropdownMenuItem>
