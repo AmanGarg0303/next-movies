@@ -43,7 +43,6 @@ export default function AddMovie() {
   });
 
   const onSubmit = async (values: z.infer<typeof MovieSchema>) => {
-    console.log("values:", values);
     setError("");
     setSuccess("");
     values.genres = selectedGenres;
@@ -58,8 +57,8 @@ export default function AddMovie() {
     setSelectedGenres([]);
   };
 
-  console.log({ error, success, isPending });
-  console.log(errors);
+  // console.log({ error, success, isPending });
+  // console.log(errors);
 
   return (
     <div>
@@ -140,10 +139,20 @@ export default function AddMovie() {
                 "Music",
                 "Horror",
                 "History",
+                "Sci-fi",
+                "Heist",
+                "Action",
+                "Adventure",
+                "Comedy",
+                "Romance",
+                "Thriller",
+                "Sports",
+                "Fantasy",
+                "Mystery",
               ].map((item, _) => (
                 <span
                   key={_}
-                  className={`text-white border p-2 rounded-md ${
+                  className={`text-white cursor-pointer border p-2 rounded-md ${
                     selectedGenres.includes(item) && "bg-red-500"
                   } `}
                   onClick={() => handleSelectUnselect(item)}
