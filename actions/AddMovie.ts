@@ -3,6 +3,7 @@ import * as z from "zod";
 import prisma from "@/lib/db";
 import { MovieSchema } from "@/validators";
 import { revalidatePath } from "next/cache";
+import redis from "@/lib/redisClient";
 
 export const addMovieAction = async (values: z.infer<typeof MovieSchema>) => {
   const validatedData = MovieSchema.safeParse(values);
@@ -35,6 +36,7 @@ export const addMovieAction = async (values: z.infer<typeof MovieSchema>) => {
     },
   });
 
+  redis.del("movies");
   revalidatePath("/");
 
   return { success: "New movie created!" };
