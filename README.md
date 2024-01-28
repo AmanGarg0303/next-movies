@@ -2,6 +2,8 @@ It is a movies website where you have to login with google first, then you will 
 
 The postgres and redis database are Containerized using docker.
 
+We are using zod to check the addMovie schema.
+
 The movies are cached to reduce the response time. Whenever a new movie is added then the cache is cleared.
 
 .env includes:
