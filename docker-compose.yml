@@ -13,5 +13,12 @@ services:
       POSTGRES_PASSWORD: nextMovies
       POSTGRES_DB: nextMovies
 
+  redis:
+    container_name: next--movies-cache
+    image: redis/redis-stack
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+
 volumes:
   postgres_data:
