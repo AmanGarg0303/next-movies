@@ -10,7 +10,19 @@ export const getMoviesAction = async () => {
       return JSON.parse(cacheVal);
     }
 
-    const movies = await prisma.movie.findMany({});
+    const movies = await prisma.movie.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        title: true,
+        rating: true,
+        coverImg: true,
+        genres: true,
+        publishedDate: true,
+      },
+    });
     await redis.set("movies", JSON.stringify(movies));
 
     return movies;
