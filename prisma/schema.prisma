@@ -55,4 +55,6 @@ model Movie {
   genres           String[]
   publishedDate    String?
   createdAt        DateTime @default(now())
+
+  @@map("movies")
 }
