@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 export const Movies = () => {
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(2);
+  const [page, setPage] = useState(Number(sessionStorage.getItem("page")) || 1);
+  const [totalPages, setTotalPages] = useState(
+    Number(sessionStorage.getItem("totalPages")) || 2
+  );
   const [movies, setMovies] = useState<Array<IMovie>>(
     JSON.parse(sessionStorage.getItem("movies")) || []
   );
@@ -25,6 +27,8 @@ export const Movies = () => {
     }
 
     setMovies([...movies, ...data.data]);
+    sessionStorage.setItem("page", JSON.stringify(page));
+    sessionStorage.setItem("totalPages", JSON.stringify(totalPages));
     sessionStorage.setItem("movies", JSON.stringify(movies));
   };
 
