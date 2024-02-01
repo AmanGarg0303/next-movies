@@ -6,7 +6,9 @@ import { useInView } from "react-intersection-observer";
 export const Movies = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(2);
-  const [movies, setMovies] = useState<Array<IMovie>>([]);
+  const [movies, setMovies] = useState<Array<IMovie>>(
+    JSON.parse(sessionStorage.getItem("movies")) || []
+  );
   const { ref, inView } = useInView({
     threshold: 0.5,
   });
@@ -23,7 +25,10 @@ export const Movies = () => {
     }
 
     setMovies([...movies, ...data.data]);
+    sessionStorage.setItem("movies", JSON.stringify(movies));
   };
+
+  // console.log(sessionStorage.getItem("movies"));
 
   useEffect(() => {
     if (inView) {
