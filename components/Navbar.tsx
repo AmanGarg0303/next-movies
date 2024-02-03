@@ -31,7 +31,7 @@ export const Navbar = async () => {
               About
             </Button>
             <Button variant="link" className="text-white text-xl">
-              Explore
+              <Link href="/explore">Explore</Link>
             </Button>
           </div>
         </div>

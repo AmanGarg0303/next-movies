@@ -86,4 +86,14 @@
     /* scrollbar-width: none; */
     -ms-overflow-style: none;
   }
+
+  .change-scrollbar ::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+  }
+
+  .change-scrollbar ::-webkit-scrollbar-thumb {
+    border-radius: 2em;
+    background: #38cc77;
+  }
 }
