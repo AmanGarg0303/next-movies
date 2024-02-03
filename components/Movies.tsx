@@ -4,16 +4,20 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 export const Movies = () => {
-  const [page, setPage] = useState(Number(sessionStorage.getItem("page")) || 1);
-  const [totalPages, setTotalPages] = useState(
-    Number(sessionStorage.getItem("totalPages")) || 2
-  );
-  const [movies, setMovies] = useState<Array<IMovie>>(
-    JSON.parse(sessionStorage.getItem("movies")) || []
-  );
+  const [page, setPage] = useState(1);
+
+  const [totalPages, setTotalPages] = useState(2);
+
+  const [movies, setMovies] = useState<Array<IMovie>>([]);
   const { ref, inView } = useInView({
     threshold: 0.5,
   });
+
+  useEffect(() => {
+    setPage(Number(sessionStorage.getItem("page")) || 1);
+    setTotalPages(Number(sessionStorage.getItem("totalPages")) || 2);
+    setMovies(JSON.parse(sessionStorage.getItem("movies")) || []);
+  }, []);
 
   const fetchData = async () => {
     const res = await fetch(`/api/movies?page=${page}&limit=${2}`);
