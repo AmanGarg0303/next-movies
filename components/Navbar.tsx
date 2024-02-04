@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import {
@@ -9,11 +10,13 @@ import {
 import Image from "next/image";
 import { UserIcon, ClapperboardIcon } from "lucide-react";
 import { LogoutBtn } from "./Logout";
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
+import { useSession } from "next-auth/react";
 
-export const Navbar = async () => {
-  const session = await auth();
+export const Navbar = () => {
+  // const session = await auth();
   // console.log(session);
+  const { data } = useSession();
 
   return (
     <nav className="px-20 py-4 absolute top-0 w-full z-40">
@@ -36,7 +39,7 @@ export const Navbar = async () => {
           </div>
         </div>
 
-        {!session?.user ? (
+        {!data?.user ? (
           <Link href="/auth/login">
             <Button variant="secondary" className="text-xl font-medium">
               Login
@@ -46,7 +49,7 @@ export const Navbar = async () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="text-xl">
               <Image
-                src={session?.user?.image!}
+                src={data?.user?.image!}
                 width={50}
                 height={50}
                 alt="profile"
@@ -61,11 +64,12 @@ export const Navbar = async () => {
                   <span>
                     <UserIcon className="mr-2 h-4 w-4" />
                   </span>
-                  <span>{session?.user?.name}</span>
+                  <span>{data?.user?.name}</span>
                 </div>
               </DropdownMenuItem>
 
-              {session?.user?.role === "ADMIN" && (
+              {/** @ts-ignore */}
+              {data?.user?.role === "ADMIN" && (
                 <Link href={"/admin/addMovie"}>
                   <DropdownMenuItem>
                     <div className="flex items-center justify-between w-full cursor-pointer">
