@@ -1,26 +1,16 @@
-const genres = [
-  "Comedy",
-  "Drama",
-  "Horror",
-  "Thriller",
-  "Mystery",
-  "Action",
-  "Sci-fic",
-  "Documentry",
-  "Fantasy",
-  "Adventure",
-  "Short Story",
-];
+import { getCategoriesAction } from "@/actions/getCategories";
 
-export const Genres = () => {
+export const Genres = async () => {
+  const { allCat } = await getCategoriesAction();
+
   return (
     <div className="flex gap-x-24 mx-16 px-16 py-4 no-scrollbar overflow-x-auto">
-      {genres.map((genre, _) => (
+      {allCat.map((cat: any) => (
         <div
-          key={_}
+          key={cat.id}
           className="whitespace-nowrap border px-8 py-4 text-xl font-semibold rounded-xl cursor-pointer bg-[#0e0e0e] transition duration-100 transform hover:scale-125"
         >
-          {genre}
+          {cat.catName}
         </div>
       ))}
     </div>
