@@ -58,3 +58,11 @@ model Movie {
 
   @@map("movies")
 }
+
+model Category {
+  id        String   @id @default(cuid())
+  catName   String
+  createdAt DateTime @default(now())
+
+  @@map("categories")
+}

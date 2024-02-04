@@ -19,3 +19,9 @@ export const MovieSchema = z.object({
     message: "Date is required!",
   }),
 });
+
+export const CategorySchema = z.object({
+  catName: z.string().nonempty({
+    message: "Category Name is required!",
+  }),
+});

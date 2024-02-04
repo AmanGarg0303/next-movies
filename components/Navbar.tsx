@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { UserIcon, ClapperboardIcon } from "lucide-react";
+import { UserIcon, ClapperboardIcon, LayoutGridIcon } from "lucide-react";
 import { LogoutBtn } from "./Logout";
 // import { auth } from "@/auth";
 import { useSession } from "next-auth/react";
@@ -67,6 +67,20 @@ export const Navbar = () => {
                   <span>{data?.user?.name}</span>
                 </div>
               </DropdownMenuItem>
+
+              {/** @ts-ignore */}
+              {data?.user?.role === "ADMIN" && (
+                <Link href={"/admin/addCategory"}>
+                  <DropdownMenuItem>
+                    <div className="flex items-center justify-between w-full cursor-pointer">
+                      <span>
+                        <LayoutGridIcon className="mr-3 h-4 w-4" />
+                      </span>
+                      <span>Add Category</span>
+                    </div>
+                  </DropdownMenuItem>
+                </Link>
+              )}
 
               {/** @ts-ignore */}
               {data?.user?.role === "ADMIN" && (
