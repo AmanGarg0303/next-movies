@@ -1,7 +1,7 @@
 "use client";
 
 import * as z from "zod";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { addMovieAction } from "@/actions/AddMovie";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MovieSchema } from "@/validators";
 import { AlertTriangleIcon, CheckCircle2Icon } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
+import { getCategoriesAction } from "@/actions/getCategories";
 
 export default function AddMovie() {
+  const [cats, setCats] = useState<Array<ICat> | []>([]);
+
+  useEffect(() => {
+    const fetchCat = async () => {
+      const res = await getCategoriesAction();
+      setCats(res?.allCat);
+    };
+
+    fetchCat();
+  }, []);
+
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -135,33 +147,15 @@ export default function AddMovie() {
 
           <div className="flex flex-col">
             <div className="flex gap-2 w-96 flex-wrap">
-              {[
-                "Cinema",
-                "Drama",
-                "Photography",
-                "Music",
-                "Horror",
-                "History",
-                "Sci-fi",
-                "Heist",
-                "Action",
-                "Adventure",
-                "Comedy",
-                "Romance",
-                "Thriller",
-                "Sports",
-                "Fantasy",
-                "Mystery",
-                "Love",
-              ].map((item, _) => (
+              {cats.map((cat: ICat) => (
                 <span
-                  key={_}
+                  key={cat.id}
                   className={`text-white cursor-pointer border p-2 rounded-md ${
-                    selectedGenres.includes(item) && "bg-red-500"
+                    selectedGenres.includes(cat.catName) && "bg-red-500"
                   } `}
-                  onClick={() => handleSelectUnselect(item)}
+                  onClick={() => handleSelectUnselect(cat.catName)}
                 >
-                  {item}
+                  {cat.catName}
                 </span>
               ))}
             </div>

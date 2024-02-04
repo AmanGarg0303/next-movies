@@ -8,3 +8,8 @@ interface IMovie {
   publishedDate?: string;
   genres?: [string];
 }
+
+interface ICat {
+  id: string;
+  catName: string;
+}
