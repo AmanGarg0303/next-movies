@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MovieSchema } from "@/validators";
 import { AlertTriangleIcon, CheckCircle2Icon } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
 
 export default function AddMovie() {
   const [error, setError] = useState<string | undefined>("");
@@ -62,6 +63,8 @@ export default function AddMovie() {
 
   return (
     <div>
+      <Navbar />
+
       <div className="px-20 py-24 w-full grid place-items-center">
         <form
           onSubmit={handleSubmit((v) => onSubmit(v))}
@@ -149,6 +152,7 @@ export default function AddMovie() {
                 "Sports",
                 "Fantasy",
                 "Mystery",
+                "Love",
               ].map((item, _) => (
                 <span
                   key={_}

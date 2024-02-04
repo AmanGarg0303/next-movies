@@ -5,6 +5,7 @@ import { logoutAction } from "@/actions/logout";
 import { totalMoviesAction } from "@/actions/totalMovies";
 import { useSession } from "next-auth/react";
 import { useRouter, redirect } from "next/navigation";
+import { Navbar } from "@/components/Navbar";
 
 export default function ExplorePage() {
   const user = useSession();
@@ -39,7 +40,9 @@ export default function ExplorePage() {
 
   return (
     <div className="h-screen flex justify-center items-center scrollbar-hide">
-      <div className="h-[80vh] border mx-20 scrollbar-hide change-scrollbar">
+      <Navbar />
+
+      <div className="h-[80vh] mt-20 border mx-20 scrollbar-hide change-scrollbar">
         <TerminalContextProvider>
           <ReactTerminal
             prompt={

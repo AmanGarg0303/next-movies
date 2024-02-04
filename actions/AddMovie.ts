@@ -37,7 +37,9 @@ export const addMovieAction = async (values: z.infer<typeof MovieSchema>) => {
   });
 
   const keys = await redis.keys("*movies*");
-  await redis.del(keys);
+  if (keys.length > 0) {
+    await redis.del(keys);
+  }
   revalidatePath("/");
 
   return { success: "New movie created!" };
