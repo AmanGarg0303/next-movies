@@ -10,12 +10,9 @@ import {
 import Image from "next/image";
 import { UserIcon, ClapperboardIcon, LayoutGridIcon } from "lucide-react";
 import { LogoutBtn } from "./Logout";
-// import { auth } from "@/auth";
 import { useSession } from "next-auth/react";
 
 export const Navbar = () => {
-  // const session = await auth();
-  // console.log(session);
   const { data } = useSession();
 
   return (
@@ -28,7 +25,7 @@ export const Navbar = () => {
         <div>
           <div className="flex gap-x-8">
             <Button variant="link" className="text-white text-xl">
-              Home
+              <Link href="/">Home</Link>
             </Button>
             <Button variant="link" className="text-white text-xl">
               About
