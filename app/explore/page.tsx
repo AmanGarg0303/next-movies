@@ -3,6 +3,7 @@ import React from "react";
 import { ReactTerminal, TerminalContextProvider } from "react-terminal";
 import { logoutAction } from "@/actions/logout";
 import { totalMoviesAction } from "@/actions/totalMovies";
+import { totalCategoriesAction } from "@/actions/totalCategories";
 import { useSession } from "next-auth/react";
 import { useRouter, redirect } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
@@ -32,7 +33,15 @@ export default function ExplorePage() {
         help: "Total movies on website",
         action: async () => {
           const a = await totalMoviesAction();
-          return `Total movies on website: ${a.totalMovies}`;
+          return `Total movies on website: ${a?.totalMovies}`;
+        },
+      },
+
+      "total-categories": {
+        help: "Total categories on website",
+        action: async () => {
+          const a = await totalCategoriesAction();
+          return `Total categories on website: ${a?.totalCategories}`;
         },
       },
     };
