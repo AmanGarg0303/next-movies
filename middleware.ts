@@ -7,7 +7,7 @@ const { auth } = NextAuth(authConfig);
 const publicRoutes: Array<String> = [];
 const authRoutes = ["/auth/login"];
 const apiAuthPrefix = "/api/auth";
-const adminRoutes = ["/admin/addMovie"];
+const adminRoutes = ["/admin/addMovie", "/admin/addCategory"];
 
 export const DEFAULT_LOGIN_REDIRECT = "/";
 
@@ -20,6 +20,7 @@ export default auth(async (req) => {
   const isAdminRoute = nextUrl.pathname.startsWith("/admin");
 
   // console.log(req.auth);
+  // @ts-ignore
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
   const isAdmin = token?.role === "ADMIN";
 
