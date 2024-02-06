@@ -7,7 +7,7 @@ export const CardComponent = ({
   icon,
 }: {
   title: string;
-  data: string;
+  data: number;
   icon: ReactNode;
 }) => {
   return (

@@ -1,19 +1,16 @@
 import { Navbar } from "@/components/Navbar";
 import React from "react";
 import { CardComponent } from "@/components/Card";
-import {
-  ClapperboardIcon,
-  BlocksIcon,
-  Users2Icon,
-  Trash2Icon,
-  ViewIcon,
-} from "lucide-react";
+import { ClapperboardIcon, BlocksIcon, Users2Icon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MoviesList } from "@/components/MoviesList";
 import { CategoriesList } from "@/components/CategoriesList";
 import { UsersList } from "@/components/UsersList";
+import { dashboardTotalLists } from "@/actions/dashboardTotalLists";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const data = await dashboardTotalLists();
+
   return (
     <div>
       <Navbar />
@@ -22,15 +19,19 @@ export default function DashboardPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <CardComponent
             title="Total Movies"
-            data="45"
+            data={data?.totalMovies}
             icon={<ClapperboardIcon />}
           />
           <CardComponent
             title="Total Categories"
-            data="20"
+            data={data?.totalCategories}
             icon={<BlocksIcon />}
           />
-          <CardComponent title="Total Users" data="2" icon={<Users2Icon />} />
+          <CardComponent
+            title="Total Users"
+            data={data?.totalUsers}
+            icon={<Users2Icon />}
+          />
         </div>
 
         <div>
