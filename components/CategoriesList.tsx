@@ -25,8 +25,6 @@ export const CategoriesList = () => {
     fetchData();
   }, [page]);
 
-  console.log(categories);
-
   return (
     <div className="relative overflow-x-auto">
       <div className="mb-4">
