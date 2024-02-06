@@ -1,12 +1,14 @@
-It is a movies website where you have to login with google first, then you will redirected to the home page, which list of movies. The admin account can add a movie and a category too.
+I'm using `docker` to run `postgres` and `redis`.
 
-Home page is provided with infinite scroll for better performance.
+Using `prisma ORM` for requests.
 
-The postgres and redis database are Containerized using docker.
+Using `zod` for validations.
 
-We are using zod to check the addMovie schema and addCategory schema.
+It is a movies website where you have to `login with google` first to see the list of movies. The home page has `infinite scroll` enabled so that we only fetch desired movies and then they are cached using `redis` to reduce response time. Homepage also has categories list.
 
-The movies are cached to reduce the response time. Whenever a new movie is added then the cache is cleared.
+The explore page has a `react-terminal` where we can play with some commands.
+
+The admin has the ability to add a new movie or category. Whenever a new movie or category is added, the redis cache is cleared. Admin has a `paginated` list of categories, movies, users.
 
 .env includes:
 
