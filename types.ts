@@ -12,4 +12,5 @@ interface IMovie {
 interface ICat {
   id: string;
   catName: string;
+  createdAt: string;
 }

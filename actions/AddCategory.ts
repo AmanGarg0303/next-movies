@@ -3,6 +3,7 @@ import * as z from "zod";
 import prisma from "@/lib/db";
 import { CategorySchema } from "@/validators";
 import { revalidatePath } from "next/cache";
+import redis from "@/lib/redisClient";
 
 export const addCategoryAction = async (
   values: z.infer<typeof CategorySchema>
@@ -33,6 +34,10 @@ export const addCategoryAction = async (
     },
   });
 
+  const keys = await redis.keys("*categories*");
+  if (keys.length > 0) {
+    await redis.del(keys);
+  }
   revalidatePath("/");
 
   return { success: "New Category created!" };
