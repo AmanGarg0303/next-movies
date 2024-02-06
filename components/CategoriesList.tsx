@@ -1,6 +1,7 @@
 "use client";
 import { Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const LIMIT: number = 5;
 
@@ -29,7 +30,10 @@ export const CategoriesList = () => {
       await fetch(`/api/categories/${catId}`, {
         method: "DELETE",
       });
+
+      toast.success("Category deleted successfully!");
     } catch (error) {
+      toast.error("Something went wrong!");
       console.log(error);
     }
   };

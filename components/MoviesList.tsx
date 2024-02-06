@@ -1,6 +1,7 @@
 "use client";
 import { Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const LIMIT: number = 5;
 
@@ -29,7 +30,9 @@ export const MoviesList = () => {
       await fetch(`/api/movies/${movieId}`, {
         method: "DELETE",
       });
+      toast.success("Movie deleted successfully!");
     } catch (error) {
+      toast.error("Something went wrong!");
       console.log(error);
     }
   };

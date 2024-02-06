@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Poppins({ subsets: ["latin"], weight: "300" });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
           className={`${inter.className} bg-black text-white overflow-x-hidden h-full`}
         >
           {children}
+          <Toaster />
         </body>
       </html>
     </SessionProvider>
