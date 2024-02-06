@@ -10,6 +10,8 @@ The explore page has a `react-terminal` where we can play with some commands.
 
 The admin has the ability to add a new movie or category. Whenever a new movie or category is added, the redis cache is cleared. Admin has a `paginated` list of categories, movies, users.
 
+The admin routes are also protected using the `middleware.ts` file.
+
 .env includes:
 
 > DATABASE_URL=
