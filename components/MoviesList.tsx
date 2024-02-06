@@ -1,6 +1,30 @@
+"use client";
 import { Trash2Icon, ViewIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const LIMIT: number = 5;
 
 export const MoviesList = () => {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(2);
+  const [movies, setMovies] = useState<Array<IMovie>>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`/api/movies?page=${page}&limit=${LIMIT}`);
+      const data = await res.json();
+
+      if (data.totalPages !== totalPages) {
+        setTotalPages(data.totalPages);
+      }
+
+      // setMovies([...movies, ...data.data]);
+      setMovies(data.data);
+    };
+
+    fetchData();
+  }, [page]);
+
   return (
     <div className="relative overflow-x-auto">
       <div className="mb-4">
@@ -50,26 +74,22 @@ export const MoviesList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b hover:bg-gray-900">
-            <td className="px-6 py-4">vhreGBPUR</td>
-            <td className="px-6 py-4">The Thief</td>
-            <td className="px-6 py-4">10</td>
-            <td className="px-6 py-4">Heist, adventure</td>
-            <td className="px-6 py-4 flex gap-x-3 items-center">
-              <Trash2Icon className="w-5 text-red-500 cursor-pointer" />
-              <ViewIcon className="w-5 text-yellow-500 cursor-pointer" />
-            </td>
-          </tr>
-          <tr className="border-b hover:bg-gray-900">
-            <td className="px-6 py-4">vhreGBPUR</td>
-            <td className="px-6 py-4">Last Wish</td>
-            <td className="px-6 py-4">8.6</td>
-            <td className="px-6 py-4">Heist, adventure</td>
-            <td className="px-6 py-4 flex gap-x-3 items-center">
-              <Trash2Icon className="w-5 text-red-500 cursor-pointer" />
-              <ViewIcon className="w-5 text-yellow-500 cursor-pointer" />
-            </td>
-          </tr>
+          {movies?.map((movie) => (
+            <tr key={movie.id} className="border-b hover:bg-gray-900">
+              <td className="px-6 py-4">{movie.id}</td>
+              <td className="px-6 py-4">{movie.title}</td>
+              <td className="px-6 py-4">{movie.rating}</td>
+              <td className="px-6 py-4">
+                {movie.genres?.map((genre) => (
+                  <span key={genre}>{genre}, </span>
+                ))}
+              </td>
+              <td className="px-6 py-4 flex gap-x-3 items-center">
+                <Trash2Icon className="w-5 text-red-500 cursor-pointer" />
+                <ViewIcon className="w-5 text-yellow-500 cursor-pointer" />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
 
@@ -78,20 +98,31 @@ export const MoviesList = () => {
         aria-label="Table navigation"
       >
         <span className="text-sm font-normal text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
-          Showing <span className="font-semibold">1-10</span> of{" "}
-          <span className="font-semibold">1000</span>
+          Showing{" "}
+          <span className="font-semibold">
+            {page * LIMIT - 5}-{page * LIMIT}
+          </span>{" "}
+          of <span className="font-semibold">{totalPages * LIMIT}</span>
         </span>
         <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
           <li>
-            <span className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-400 border border-gray-300 rounded-s-lg hover:text-white cursor-pointer">
+            <button
+              className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-400 border border-gray-300 rounded-s-lg hover:text-white cursor-pointer disabled:cursor-not-allowed"
+              disabled={page <= 1}
+              onClick={() => setPage((prev) => prev - 1)}
+            >
               Previous
-            </span>
+            </button>
           </li>
 
           <li>
-            <span className="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 border border-gray-300 rounded-e-lg hover:text-white cursor-pointer">
+            <button
+              className="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 border border-gray-300 rounded-e-lg hover:text-white cursor-pointer disabled:cursor-not-allowed"
+              disabled={page === totalPages}
+              onClick={() => setPage((prev) => prev + 1)}
+            >
               Next
-            </span>
+            </button>
           </li>
         </ul>
       </nav>
