@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 
 const LIMIT: number = 5;
-export const UsersList = () => {
+
+export default function UsersList() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(2);
   const [users, setUsers] = useState<Array<IUser>>([]);
@@ -98,4 +99,4 @@ export const UsersList = () => {
       </nav>
     </div>
   );
-};
+}

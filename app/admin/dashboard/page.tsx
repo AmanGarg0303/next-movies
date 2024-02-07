@@ -4,9 +4,13 @@ import { CardComponent } from "@/components/Card";
 import { ClapperboardIcon, BlocksIcon, Users2Icon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MoviesList } from "@/components/MoviesList";
-import { CategoriesList } from "@/components/CategoriesList";
-import { UsersList } from "@/components/UsersList";
+// import { CategoriesList } from "@/components/CategoriesList";
+// import { UsersList } from "@/components/UsersList";
 import { dashboardTotalLists } from "@/actions/dashboardTotalLists";
+import dynamic from "next/dynamic";
+
+const CategoriesList = dynamic(() => import("@/components/CategoriesList"));
+const UsersList = dynamic(() => import("@/components/UsersList"));
 
 export default async function DashboardPage() {
   const data = await dashboardTotalLists();

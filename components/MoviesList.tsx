@@ -12,7 +12,9 @@ export const MoviesList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/api/movies?page=${page}&limit=${LIMIT}`);
+      const res = await fetch(`/api/movies?page=${page}&limit=${LIMIT}`, {
+        cache: "force-cache",
+      });
       const data = await res.json();
 
       if (data.totalPages !== totalPages) {
@@ -23,6 +25,10 @@ export const MoviesList = () => {
     };
 
     fetchData();
+
+    return () => {
+      fetchData();
+    };
   }, [page]);
 
   const handleDeleteMovie = async (movieId: string) => {

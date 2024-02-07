@@ -3,7 +3,7 @@ import { Movie } from "@/components/Movie";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-export const Movies = () => {
+export default function Movies() {
   const [page, setPage] = useState(1);
 
   const [totalPages, setTotalPages] = useState(2);
@@ -16,11 +16,14 @@ export const Movies = () => {
   useEffect(() => {
     setPage(Number(sessionStorage.getItem("page")) || 1);
     setTotalPages(Number(sessionStorage.getItem("totalPages")) || 2);
+    // @ts-ignore
     setMovies(JSON.parse(sessionStorage.getItem("movies")) || []);
   }, []);
 
   const fetchData = async () => {
-    const res = await fetch(`/api/movies?page=${page}&limit=${2}`);
+    const res = await fetch(`/api/movies?page=${page}&limit=${2}`, {
+      cache: "force-cache",
+    });
     const data = await res.json();
 
     if (page < data.totalPages) {
@@ -69,4 +72,4 @@ export const Movies = () => {
       )}
     </>
   );
-};
+}

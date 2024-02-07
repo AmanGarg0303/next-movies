@@ -6,7 +6,7 @@ export const Hero = () => {
     <div className="relative w-screen h-[80vh]">
       <Image
         src={bgImg}
-        unoptimized
+        // unoptimized
         priority
         alt="hero"
         fill

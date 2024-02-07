@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 const LIMIT: number = 5;
 
-export const CategoriesList = () => {
+export default function CategoriesList() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(2);
   const [categories, setCategories] = useState<Array<ICat>>([]);
@@ -114,4 +114,4 @@ export const CategoriesList = () => {
       </nav>
     </div>
   );
-};
+}
